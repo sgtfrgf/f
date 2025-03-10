@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naruto Characters - Ultimate Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff4e50;
+            --secondary-color: #2c3e50;
+            --text-color: #ffffff;
+            --background-color: #1a1a1a;
+            --card-background: rgba(255, 255, 255, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--background-color), var(--secondary-color));
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .view-profile {
+            font-size: clamp(14px, 2vw, 18px);
+            padding: 12px 24px;
+            white-space: nowrap;
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ee5253);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
+            padding: 2rem 0;
+        }
+
+        .character-card {
+            background: var(--card-background);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .character-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .character-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px;
+            border-radius: 25px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: clamp(12px, 1.5vw, 16px);
+        }
+
+        .character-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .character-title {
+            color: #ccc;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: rgba(0, 0, 0, 0.5);
+            margin-top: 2rem;
+        }
+
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ee5253);
+            color: white;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .button-container {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px;
+            }
+
+            .view-profile {
+                text-align: center;
+                margin: 5px 0;
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            .character-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+                padding: 1rem;
+            }
+
+            .character-image {
+                height: 250px;
+            }
+
+            .search-container {
+                padding: 10px;
+            }
+
+            .filter-buttons {
+                padding: 0 10px;
+            }
+
+            .filter-btn {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .character-info {
+                padding: 1rem;
+            }
+
+            .character-name {
+                font-size: 1.2rem;
+            }
+
+            .character-title {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            .character-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .button-container {
+                gap: 8px;
+            }
+
+            .view-profile {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .search-bar {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .filter-buttons {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Tablet Devices */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .character-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .button-container {
+                gap: 10px;
+            }
+
+            .view-profile {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) {
+            .character-card:active {
+                transform: scale(0.98);
+            }
+
+            .view-profile:active {
+                transform: scale(0.95);
+            }
+
+            .filter-btn:active {
+                background: rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        /* High-DPI Screens */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .character-image {
+                image-rendering: -webkit-optimize-contrast;
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #000000;
+                --card-background: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Loading States */
+        .character-image.loading {
+            background: linear-gradient(90deg, #2c3e50 0%, #3498db 50%, #2c3e50 100%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="chakra-orb" style="top: 20%; left: 10%;"></div>
+    <div class="chakra-orb" style="top: 60%; right: 15%;"></div>
+    <div class="chakra-orb" style="bottom: 10%; left: 30%;"></div>
+
+    <header>
+        <div class="container">
+            <h1>Naruto Characters</h1>
+            <p>Explore the legendary ninjas of the Hidden Leaf Village</p>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search characters...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="hokage">Hokages</button>
+                    <button class="filter-btn" data-filter="uchiha">Uchiha</button>
+                    <button class="filter-btn" data-filter="sannin">Sannin</button>
+                    <button class="filter-btn" data-filter="jonin">Jonin</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="button-container" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+            <a href="hokages.html" class="view-profile" style="font-size: 18px; padding: 10px 20px; background: linear-gradient(135deg, #ff4e50, #f9d423); color: white; text-decoration: none; border-radius: 5px; transition: transform 0.3s;">View All Hokages</a>
+            <a href="sannin.html" class="view-profile" style="font-size: 18px; padding: 10px 20px; background: linear-gradient(135deg, #8e44ad, #2ecc71); color: white; text-decoration: none; border-radius: 5px; transition: transform 0.3s;">View Legendary Sannin</a>
+            <a href="villages.html" class="view-profile" style="font-size: 18px; padding: 10px 20px; background: linear-gradient(135deg, #3498db, #2980b9); color: white; text-decoration: none; border-radius: 5px; transition: transform 0.3s;">View All Villages</a>
+            <a href="tailedbeasts.html" class="view-profile" style="font-size: 18px; padding: 10px 20px; background: linear-gradient(135deg, #e67e22, #d35400); color: white; text-decoration: none; border-radius: 5px; transition: transform 0.3s;">View Tailed Beasts</a>
+            <a href="ninja-wars.html" class="view-profile" style="font-size: 18px; padding: 10px 20px; background: linear-gradient(135deg, #c0392b, #e74c3c); color: white; text-decoration: none; border-radius: 5px; transition: transform 0.3s;">Ninja Wars History</a>
+            <a href="uchiha.html" class="view-profile" style="font-size: 18px; padding: 10px 20px; background: linear-gradient(135deg, #800000, #ff0000); color: white; text-decoration: none; border-radius: 5px; transition: transform 0.3s;">Uchiha Clan</a>
+        </div>
+        <div class="character-grid">
+            <div class="character-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtLHK481A1RmVRd2dvubjkDPwvjdApLlWrbHdRJKpJW8IsuYQwSlKEjRY&s" alt="Naruto Uzumaki" class="character-image">
+                <div class="character-info">
+                    <h2 class="character-name">Naruto Uzumaki</h2>
+                    <p class="character-title">The Seventh Hokage</p>
+                    <a href="naruto.html" class="view-profile" target="_blank">View Profile</a>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <img src="https://motionbgs.com/media/1192/sasuke-lightning-jutsu.jpg" alt="Sasuke Uchiha" class="character-image">
+                <div class="character-info">
+                    <h2 class="character-name">Sasuke Uchiha</h2>
+                    <p class="character-title">The Last Uchiha</p>
+                    <a href="sasuke.html" class="view-profile"target="_blank" >View Profile</a>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*RDY_6oxE1mUMgqCpIsREag.png" alt="Sakura Haruno" class="character-image">
+                <div class="character-info">
+                    <h2 class="character-name">Sakura Haruno</h2>
+                    <p class="character-title">The Legendary Medical Ninja</p>
+                    <a href="sakura.html" class="view-profile"target="_blank">View Profile</a>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNjw4UByGAb9DBnkVBratZP342KkfJPlY_Rw&s" alt="Minato Namikaze" class="character-image">
+                <div class="character-info">
+                    <h2 class="character-name">Minato Namikaze</h2>
+                    <p class="character-title">The Yellow Flash</p>
+                    <a href="minato.html" class="view-profile"target="_blank">View Profile</a>
+
+                </div>
+            </div>
+
+            <div class="character-card">
+                <img src="https://wallpapercat.com/w/full/1/5/e/732974-3840x2160-desktop-4k-hatake-kakashi-wallpaper-photo.jpg" alt="Kakashi Hatake" class="character-image">
+                <div class="character-info">
+                    <h2 class="character-name">Kakashi Hatake</h2>
+                    <p class="character-title">The Copy Ninja</p>
+                    <a href="kakashi.html" class="view-profile"target="_blank">View Profile</a>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <img src="data:image/jpeg;base64,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" alt="Asura Otsutsuki" class="character-image">
+                <div class="character-info">
+                    <h2 class="character-name">Asura Otsutsuki</h2>
+                    <p class="character-title">The Younger Son of the Sage</p>
+                    <a href="asura.html" class="view-profile" target="_blank">View Profile</a>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <img src="https://staticg.sportskeeda.com/editor/2022/02/3231e-16452182429172-1920.jpg" alt="Indra Otsutsuki" class="character-image">
+                <div class="character-info">
+                    <h2 class="character-name">Indra Otsutsuki</h2>
+                    <p class="character-title">The Elder Son of the Sage</p>
+                    <a href="indra.html" class="view-profile" target="_blank">View Profile</a>
+                </div>
+            </div>
+
+            <div class="character-card">
+                
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhISEBAQFRUVFRIQFRAQEg8PEBAQFREWFhURFRUYHSggGBolGxUVITEiJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQFy0dHR8tLS0tLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tKy0tLSstLSstKzQuN//AABEIAJ8BPgMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAAAgMEBQYBBwj/xAA/EAACAQICBQsCBAUDBAMAAAABAgADEQQhBRIxQVEGEyIyYXFygZGhsbLBByNi0RRCUoLhM5LxU6Lw8kNjwv/EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EACARAQEAAgMBAQEAAwAAAAAAAAABAhEDEiExQVEEMkL/2gAMAwEAAhEDEQA/APSsKPy08K/SIu0i4Kp0E8K/SJI5yWksiJCzmvEkw2DpnBEBosQBUSzQaMMIyFSpxkdn4R2okYNOPQ2cp1eMXrXkWvUWmpZ2CgbWYgCUVblKpNqIv+tsh5D94h9X2KKqLsQB2ymxGPA6o8z+0hNiC+bEk8TIeLrWEO1Pqa0piyQbsT2bvSYzSlTOWukcbtzmdxVa5hAisYmdM5GBCEIAQhCAEIQgBCEIAulWZTdGZfCSPiWFHTlYbSreIWPqLSskrBaPqVRdALXtrEgC/wA+0JsLihp9D11Ze0dNfbP2llQrq4ujK3cQZU0eTTHr1AOxVJ9yftJ1DkzTGZeoTx1gvwJpOybpN1YWkrD4MKLAsfEzOfUyTSwwlFtBp4cmPDBGXVGkANkcNERbLavwikZXiMVhtY7ZPbD8IyVttlRNquGBMUujzLRHWDVBCntEo4CMaX1EUXIHSHwYjTmnBh1yHSM880tph6rXZjt2TLLPS5NvoLD9RPCv0iL140pIppb+lfpEa5wzHH2LqZrQ1pE56LSpGSSXgHjRaNvUgEhq85zokFqwilz3y4mpZqSg07yso0LpTtVq7NUHoIf1t9hn3Rel9H1q1kTECjT/AJyilqr9ga41RIuE5E4RB0mqv3sFH/aBD0RiNJ6Wq121qzk8FGSJ2Ku7v2xnDY6x2zc6Zwej8JSNSph6Z3KrXqO7blGsTPMsVpE1KhfURL5BKahVRdyi3zFo5WzwmLy2yJpLFZSnw2NsNsj43F3i0pExte5kFmiqjXjcohCEIAQhCAEIQgBCEIAQhCAEdwuJem2sjWPsRwI3iNQgG00NplK3Ray1P6dzdqn7S41J5mD+9xkQeImt5P8AKPWtSxBz2LV2BuxuB7ZUyLS/CGP0lM7lAVLStlpIVzHAxjVOpCrVtC1OizVjFVo2Xnbxdj6kFooVJwxMntVdYxvLeoS44TKVAJvuVWj+cTWXaJgalIiZ5X05H0tQW9NPCv0iQquRk7C9RPCv0iJxWH1h2zLHPS7EFWvHVMr6yOhziqdbjL7xOk8vIuIrRPOjjGK9Rd5lTKFpGqVzeO4eu0YJEfouJcTVhSBMi6Wxy0KbVKjWA3Dax3KBvMkmuqIXcgKouSdwnl/KvTDYipc3CLcInAcT2mV2LW1Xp7TNTE1NeochcKg6qLwHbxO+VqmJc3NvM/aAkrSVrRFSpeN3nLwAM5CEAIQhACEIQAhCTNEYM1qyU9xN28IzP7ecVNDhJ2m8DzNZ0tYX1lHBTsHlmPKQYS7FmhCEIyEIQgBCPYSoqujVE10B6SXI1l2EAjfbZ22noZ5E4OsivRaqgYBlZX11IIuMnv8AMzz5Jh9OTbN8nNO2tSrNlsSod3BGPDgZq7TNaU5CVqYJpOlQcCObb3uD6iK0HpOpTIoYoMv8qO4tfghbYewzTDOZfKmzTShrQdrzhhLpQi0UpjqrOlRF1PsZJnAI8VEQXh1Hb+GaqXBHZPM9O0Wp1GB43np8zPLDR+tqMF329jIsU9hwvUTwr9IjsawvUTwr9Ijs5VmcTQ1haVdXBFZdQIgGbrUstsz2lXZSLn0m7r4RTulZidGIdovM8roRnMPjwbXlrhFLbBAaHp32St5T6RZAuEwwLVqozCbadLYTfdfZfvj4+TKeDLGK3lHpfnWNNG/LQ7RsdxtPcN3rIuj+Sr1vzK5NKkAWN8qjKMyQD1R2n0mn5O8mFogPWs9TaBtSmezie2RvxC0nzdDmlPSrXU8RTHWPnkPMzW8lt64l1eZY6ojVHamuqhPRXeEGS34mwue0xidacnRJpAjWJqaq9psB3kztZ7AcSQo8/wDEh4upeoi7gR63/aFprCEIRkIQhACEIQAm8/DTRVy9dhlfVXy2+/0zCohYhVFySFA4kmwHrPb9BaOGHoU6Q2qo1jxbefWZ8l800wnrI/iboropiFGw6j9zbD629TPPJ7ppnCrVoVab9VkZe0G2RHbe08Or0WRmRxZlJRhwYGxEOO/gznuyIQhNGbl52Ic5r23Htf7RcAJv/wAN9L3DYZz1b1Kd/wCm/TXyOfmZgJJ0djWo1Uqp1kYN3jep7CLjzmfJh2x0cuq9tZb5SsxuiwwOQIO4gEHyk7B4latNKiG6uocdxEenDjnlhfGlkrMtTINrR+lRJlhpKiLawkFMaoFp6XFyTPHbDKWU8tCNvRzj+FfWzklqY3y07V7YcyPWwxGcuWpA74k6uzbAbUK3ERpCiWQeIfBl6+HDbBIWkcMQg8Q+DCw9thheonhX6RHY1heonhX6RHZwtxOBp0iRqqkbIA9UMgVmvG8RWPGJprlMszjtpFwGj0pF2UXdzrPUaxdz2ngNgGwSVATJR5TPKOV2P5+u7g9EdBPCu/zNz5zecqdI8zh2sbM/5S8bnafJbzzLE7J1/wCPj/0zyqreJi3W0aqvqgk7hedSESrV/M7EUnzt/mQ8Ib1ATvJPzGxUybi1vS9z9o5gP9RfP4Mz3umuYTl52aEIQhACJXf3/YRUTT2eZ+YBqfw80bz2KDkdGiOcPDXOSD1uf7Z6zMj+H+D5jBmqVJaqxqAC12Xq01Hft/ujlfT+MqO1PD4VadrjnK7rUNh/NqUzYL2lhMMrutsfI0eJ61McXuf7UZh7gTyv8Q8KExjMpFqirUNiDZuqwPDqg+ctcdpbDIw/jdIVcTUFxzGEH5Sneh1QFOzYx3Sk5TY9Ky0jTwuIpKhexqigqWa1wAm+6jaY8Jdll7FBCEJsyM4o2APBl+bfePRjHD8tvI+8dpNcA8QDECoQvJiYAtR51LnUYrUXaV3q4/TY27LehbJ9Nr/w80zk2Gc7LvT8JPSX1N/ObwGeIYDFmlUSou1SDbiN48xeerYTSPRBBupAIPEEZTi58NZb/rTG7i3qICLGVTaNUE3ktNILGcXiFbIGP/Hysy1/U8k8M1sUtIWXbIP8a7GOtgb77ywwejLZmegxQb1Dvj2Ewz3zMtDhRHadMQK0UaNhIumF6A8Q+DJ5kDTHUHiHwY6le4XqJ4V+kR2NYXqJ4V+kR2cDqETVGUVEVTlEFa1O5nXEkhcryNUmWaobhOmM4zECnTeo2xFZz3KLyA8+5c6U5zE80D0aI1e+o2bHyGqPIytxGCZaVOo+XOE6i72RRm57LkW4yVyR0I2MqtWrD8sOXf8A+yoTrFB2Z5+kd5Y47nMUyL1aQWkoGy4zNvM28p243VmE/PrO/wBUH8EXBINs7Dt4yDXwv8rhu4m1/TbNOtLVUDh87zGKiX2i44GXtvOOaY/SOFVVBUWzA2k5SNo7/UHcfiarGaKSoCM18Oz0Mq00FUptrKQwz2dFvQ5RRGeF/ANp8h7f5iohEYa2spW7HrC2WQEXNGQhCEZHKFLXZVz6TBchc5m2yPVKBeu1NAelVamoCksL1CB0duX2ltyFwHPYtL7EDVD8D5lvyTwHOaUxDkdGjUxD/wBzVWVflj5SLfVyeNvTempoUV6OqOijDVJCU7DLf/iVGn9BGoop86QjFS9O5pJXN+kHqC+6wVchtve+V7jqIZ6O4guFYWup1Cbj/bFGsQGFZRYAkuoujDfddo7sx2zKNWRp6D1LL/DMmrlZU1gctoZFbI5ncRc5xnlDgKr4eqXXm0RCUUj86tUDc41kHUXLfnZc5raFSlkaWIAXI6gemyFewNcgd1pKxdAVEcWB1kdAexltkfSV3paeDQha2R2jI98JswNYodBu4xrRr3QdhI+8ebNW/uHzImjAVLKwI2GxBHzJ/TPCp+aR+n3veabkfitWsaZ2VV1bfqFyPbWHnMcan59+3V9rS4w1c03Wou1GVx3qb2iynbGwTyrzlPoA0DzqKeaY7P8Apsd3hO70lzyKxBqUjT2mkbf2Ncr9x5TaqKdeiLgNTqoDY7CrLf7zCaOwraO0giMSaVa9NXOxlY9G/wCoNqg99985Zl3w637F/Ltpzh24QWiQbkGXtpwqDukcWcxy3Tym4h0KWVxJ9BrbYIg3ThM9LGyzbmvhdQxANpzWndW8ogXldpdugPEPgyx5kyBpmn0B4h8GK/A0OF6ieFfpEdjWF6ieFfpEdnC6REsl4qEAZdbSHVEn1BINUTLM4ZMqOU2EqVqIoU7jnXVHfdTpDpOx/wBtvOW5nJnLo0ahRp4elqoAqU1Jt2KLknt2meRYSqalYu20s1U95N7ep9p6Xy0xPN4Ksd7AUh/ewU+xM820SvRLcTbyH+bzp4Plok3lIuNaM1BOI/tFmatzBhFMImBk1VurDiCPaUAmhmftu8peLDm/BCEJbB6L+FeEsleqRmzLSB7FXWPu3tL7kzo3mnxlQ7auJqEeAHL3LRHIPDc3gaPF9aqf7mJHtaXNIqtkLDWOs9tha7Ekj1mGV9reTyHXQGxO43HYbEfBMVECqpYqCLgAkbwDsvFyTQ6aKrsjKNVjrJcAre3SQcMwWt2nhFCgaf8ApdUf/Cerb9B/l7tndtjuJo662vY5FW/pYZhvWcp4gc2Kj2Uaus3BbDpfeAeI6YpamIrrYi1WpYEWIBckAjuIkOTNM47n8RXrWsHfWA/TqgL52AkOdE+ML9NpsPe3yY+hyHcMjmPQxpRs7b/N/wB4/hqRawHAZ7gOJk1rhPUHH4JdU1UFipUst7qQT1hfZ3R1qlio/qv62vLx8IvNsn9SkE7ySNsyuKc6lI7wfcD/ABFjS5MdPY/w+x3OYQITnSY0/wC09JfY28pbac0UuJpGm2R6yPvp1BsYTB/hnjrV2TdVp3HiQ3HsWnpc4+Wdc/Bj7DeEZii84LPYaw2jWGRseF47CEyUIEQi0PGdXBzTHysuTDfsMmKWqRJBo32Riqlp3bYaLFYyDpmp0B4h8GOrVjWlUvTB/UPgxbORfYXqJ4V+kR2NYXqJ4V+kR2cToEIQgCXEh1hHcRjEXabnguZ/xKHSumHsebUL+pukfTYPeTcLTie5ttkDEaZoJk9amDw1hf0mJ0pXqOTzlR27CTq/7Rl7SttaE4P7WkwXXL3TNOtRRKLF/wAzWYKr7AjW3cTKDCgBVA3D33+8diXQHaAZtjj1mlTDV2TTUhj+5PlJAaRyhHVN/wBLH4O0RaVL9h4HaI1HjGzO3nCIByULjNvE31GX0oq/WbxN8mViy5vkIJnVQkgDaSAO8mwjWIayk+XrlLrkrhedxmHTdzgc9yAv/wDmXawex4LDilTp0xsRFQdyqB9oslSQSVJGYzFwbWynKmGRjdlUn9Q1vnZKmoxU2fBUm/UgBB8iv3nO3XK2zItnttbOKlRhgtQgfwSqN7OtIW7gBnLKhhwl9W9jbokkqvhvs7tkAdmD5dab1KX8Ih6bM/OW/lpa5IH92XkDxmy0ljVo0y7Z7bLvY2vaeJ43HNXqNWqG7OdY8BuCjsAAHlHIEQ7T3D7zsG2+X3iX2HuM2nxjl9dA6I7LGWmiR+XfifgASvtlbylloofli/E/Mh0Yz1LmZbBB6y0C2rrVmphtwL5p5XZZppmNPVDTrhhtBp1h3r/6xFyzxL5K4psPiUFQFWo1QrqdqgtquPcz3OeWfiRooLUpY6mOhXCpVtsDlei/mPp7Z6HyfxfPYajU3si38QFm9wZz8t7YzJlj54sIQiXe0wWVCRxjFjqvfZAH6da0TWbWiQITWc2UmonrNmDh5G0qCKY8Q+DLCQdL9QeIfBjx5syuMaHC9RPCv0iOyoXSR1ECAdVekd/RGwRo4pj1nY/pHRHnbdNetPS1r4tVvbMjcMgO87BKqvjHe92sOC3t67TGXN9vpuHlE6o4D0lzE9O2kPF07iS9Qf8AGUZrplkfXOUbJaSS26VBmh0opF8r937TP1GBO3ZuORHlE1xpMIEHIkEA7CQQD3HfCChEugP2I2iKhAEo2djt9iOIjwEaZb/IPAx2kb7YESwlBXPSbxN8maVlmZYZt4m+omVj9ZcvyIuNQsth4vIS85M6UOGrrX5vXVFbXUEBxTNgXQfzEX2cLysFAkM3DK3lc/Ma227vmVYxj3vRukKWIprVoOro2xlPqDwPYZJngOi9JYnBuamEqWvm9I9Km/ev7WM22jfxYpEWxOGqo280dWop8mII95lcdNJk9IkbH45KK6znbsUdZj2fvsEwuM/FBGBGEw9Qn/qV9VEHcqklvaYrSOkatdy9aozE8SQoG5QuwCExtPs13KTlMjrUAfXdlZFCZ06QIt1t/bbMzE0dnmfkxMTT2Zf8y+uimXpx9o7j8icb7j5nC9yNoyOR8p3ePX2lT4m+5HZZ6O6g72+TKyWOAP5fmfqkN8fqXM3ysTpUzxVl9CP3mklJyqToIeDW9VP7RDk/1el6Jwa43RNGlU/noKmtt1XUWV+8FQZH/DTEN/D1KFQWehVZGXhfb/3Bo9+GVS+jqH6TVX0qtb2Ml0sHzOkGqKOhiqXS4DEUrW8yhP8AtM5bfuLFfQIhOMwG2ZKQGwt37JPVbbIxQqhiZIgBCEIASFpfqDxD4MmyFpfqDxD4Mc+gnDdRfCvwI7G8P1F8K/Ajk7wIQhACIqCdvB4BQ6UTgLnYANpPCUeKopTINQB6m1af8qdrH/zs4zSY8kZqbEXzyMyuLGZ4nMk7SeJk2WtMUSvWdm1nOt2DLVHBRw9++cBvsiahzsNpzvwHGKAtkI/i3YQiXcDMn5gCo5TMifxQPVBPdYfMewjs7qoAGtlcnsJ3Dsj1fqdxPC5TN4mnYnyPqBNEpYFlOrkStxc7Mrys0lRsT3D4t9pWM/WPLUbCLZR25+srQu3ssvmLy51LWHDKRKFMHnAf6vtf7zSxOkGJekp2qD3gR2omqSDESAAIQhACJTf3/wCYqEA5vHnO2JOW4cL/APmyc3jz+0naP2E8T7W/zHJsp9RFqccvgy3wA6A72+ZX42lY33H5k/Rg/LXvb6jIymm2F9SpV8pEvQPYyn3t95aRFTd3j95LSzc0034SVL4Ej+mtUHqFP3mzZAbXGw3HYbEXHkT6zzLRmOqYck0W1QTrMlgabm1rleOQzFjlNbozlXTcqlVSjnIEXdGPAWzHmPOc/Jhd7ZXGxoZX6QVr5XlhOETFKmpB1N7GWVHFA7co+QIk0gd0DNVMTqnsj6tcXkPEYO+wxGHrlei0QWEhaX6g8Q+DJim8h6X6g8Q+DHPof//Z" alt="Madara Uchiha" class="character-image">
+                <div class="character-info">
+                    <h2 class="character-name">Madara Uchiha</h2>
+                    <p class="character-title">The Legendary Uchiha</p>
+                    <a href="madara.html" class="view-profile" target="_blank">View Profile</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Character data with categories
+        const characters = document.querySelectorAll('.character-card');
+        characters.forEach(card => {
+            const name = card.querySelector('.character-name').textContent.toLowerCase();
+            const title = card.querySelector('.character-title').textContent.toLowerCase();
+            
+            // Set character categories
+            card.dataset.categories = [];
+            if (title.includes('hokage')) card.dataset.categories += 'hokage ';
+            if (name.includes('uchiha')) card.dataset.categories += 'uchiha ';
+            if (title.includes('sannin')) card.dataset.categories += 'sannin ';
+            if (title.includes('ninja')) card.dataset.categories += 'jonin ';
+        });
+
+        // Search functionality
+        const searchBar = document.querySelector('.search-bar');
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            characters.forEach(card => {
+                const name = card.querySelector('.character-name').textContent.toLowerCase();
+                const title = card.querySelector('.character-title').textContent.toLowerCase();
+                const isVisible = name.includes(searchTerm) || title.includes(searchTerm);
+                
+                // Add fade animation
+                if (isVisible) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                    card.style.display = 'block';
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        if (!isVisible) card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Filter characters with animation
+                characters.forEach(card => {
+                    const shouldShow = filter === 'all' || card.dataset.categories.includes(filter);
+                    if (shouldShow) {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                        card.style.display = 'block';
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            if (!shouldShow) card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Chakra orb effect
+        const chakraOrbs = document.querySelectorAll('.chakra-orb');
+        document.addEventListener('mousemove', (e) => {
+            chakraOrbs.forEach((orb, index) => {
+                const speed = 0.05 - (index * 0.01);
+                const rect = orb.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const deltaX = (e.clientX - centerX) * speed;
+                const deltaY = (e.clientY - centerY) * speed;
+                
+                orb.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                orb.style.filter = `blur(${20 + Math.abs(deltaX + deltaY) / 50}px)`;
+            });
+        });
+
+        // Lazy loading for images
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
+
+        document.querySelectorAll('.character-image').forEach(img => {
+            if (!img.complete) {
+                img.style.opacity = '0';
+                img.addEventListener('load', () => {
+                    img.style.transition = 'opacity 0.5s ease';
+                    img.style.opacity = '1';
+                });
+            }
+            imageObserver.observe(img);
+        });
+
+        // Scroll to top button
+        const scrollButton = document.createElement('button');
+        scrollButton.innerHTML = '↑';
+        scrollButton.className = 'scroll-top-btn';
+        scrollButton.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ee5253);
+            color: white;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        `;
+        document.body.appendChild(scrollButton);
+
+        window.addEventListener('scroll', () => {
+            scrollButton.style.opacity = window.scrollY > 300 ? '1' : '0';
+            scrollButton.style.transform = window.scrollY > 300 ? 'scale(1)' : 'scale(0.8)';
+        });
+
+        scrollButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add hover effects to character cards
+        characters.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+                card.style.boxShadow = '0 15px 30px rgba(0,0,0,0.4)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+            });
+        });
+
+        // Add dynamic background effects
+        function createBackgroundEffect() {
+            const canvas = document.createElement('canvas');
+            canvas.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                opacity: 0.5;
+            `;
+            document.body.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            const particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3 + 1,
+                    speedX: Math.random() * 2 - 1,
+                    speedY: Math.random() * 2 - 1
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(particle => {
+                    particle.x += particle.speedX;
+                    particle.y += particle.speedY;
+
+                    if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                    ctx.fill();
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+        createBackgroundEffect();
+
+        // Add character card animations
+        characters.forEach(card => {
+            // Add tilt effect
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+
+            // Add glow effect
+            const image = card.querySelector('.character-image');
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                image.style.filter = `drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))`;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                image.style.filter = 'none';
+            });
+        });
+
+        // Add loading animation for images
+        document.querySelectorAll('.character-image').forEach(img => {
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.5s ease';
+            
+            img.addEventListener('load', () => {
+                img.style.opacity = '1';
+            });
+
+            if (img.complete) {
+                img.style.opacity = '1';
+            }
+        });
+
+        // Add smooth scrolling for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html> 
